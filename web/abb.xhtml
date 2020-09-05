@@ -36,6 +36,7 @@
                 <p:commandButton ajax="false"  value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}"
                                  update="@all" />
                 <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PreOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
 
 
 
@@ -75,6 +76,15 @@
        
         <p:panel header="PreOrden">
             <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.preOrden()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+
+                </p:dataTable>
+        </p:panel>
+        
+        <p:panel header="PostOrden">
+            <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.postOrden()}">
                     <p:column headerText="Número">
                         <h:outputText value="#{data}" />
                     </p:column>
