@@ -37,6 +37,10 @@ public class ArbolBinarioControlador implements Serializable {
     private ArbolBinario arbol = new ArbolBinario();
     private int dato;
     private boolean verInOrden = false;
+    private boolean verPreOrden = false;
+    private boolean verPosOrden = false;
+    private boolean verPorNivel = false;
+    private boolean verHojas = false;
 
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
@@ -81,7 +85,39 @@ public class ArbolBinarioControlador implements Serializable {
     public void setVerInOrden(boolean verInOrden) {
         this.verInOrden = verInOrden;
     }
+    
+    public boolean isVerPreOrden() {
+        return verPreOrden;
+    }
 
+    public void setVerPreOrden(boolean verPreOrden) {
+        this.verPreOrden = verPreOrden;
+    }
+    
+    public boolean isVerPosOrden() {
+        return verPosOrden;
+    }
+
+    public void setVerPosOrden(boolean verPosOrden) {
+        this.verPosOrden = verPosOrden;
+    }
+    
+    public boolean isVerPorNivel() {
+        return verPorNivel;
+    }
+
+    public void setVerPorNivel(boolean verPorNivel) {
+        this.verPorNivel = verPorNivel;
+    }
+    
+    public boolean isVerHojas() {
+        return verHojas;
+    }
+
+    public void setVerHojas(boolean verHojas) {
+        this.verHojas = verHojas;
+    }
+    
     public int getDato() {
         return dato;
     }
@@ -121,6 +157,42 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verInOrden = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPreOrden() {
+        try {
+            arbol.isLleno();
+            verPreOrden = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPosOrden() {
+        try {
+            arbol.isLleno();
+            verPosOrden = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPorNivel() {
+        try {
+            arbol.isLleno();
+            verPorNivel = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarHojas() {
+        try {
+            arbol.isLleno();
+            verHojas = true;
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
