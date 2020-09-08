@@ -45,6 +45,8 @@
                 <p:commandButton value="PosOrden" action="#{arbolBinarioControlador.habilitarPosOrden()}" update="@all" ajax="false"/>
                 <p:commandButton value="PorNivel" action="#{arbolBinarioControlador.habilitarPorNivel()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
+                <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
+
 
             </p:panel>
         </h:form>
@@ -119,6 +121,17 @@
                 </p:dataTable>
             </p:panel>
         </h:panelGroup>
+        
+        <h:panelGroup rendered="#{arbolBinarioControlador.verBalance}">
+            <p:panel header="Balance">
+                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.imprimirBalance()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:panelGroup>
+
         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         

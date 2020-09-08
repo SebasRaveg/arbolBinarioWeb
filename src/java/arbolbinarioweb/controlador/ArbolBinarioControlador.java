@@ -41,6 +41,7 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verPosOrden = false;
     private boolean verPorNivel = false;
     private boolean verHojas = false;
+    private boolean verBalance = false;
 
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
@@ -118,6 +119,14 @@ public class ArbolBinarioControlador implements Serializable {
         this.verHojas = verHojas;
     }
     
+    public boolean isVerBalance() {
+        return verBalance;
+    }
+
+    public void setVerBalance(boolean verBalance) {
+        this.verBalance = verBalance;
+    }
+    
     public int getDato() {
         return dato;
     }
@@ -193,6 +202,15 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verHojas = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBalance() {
+        try {
+            arbol.isLleno();
+            verBalance = true;
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
