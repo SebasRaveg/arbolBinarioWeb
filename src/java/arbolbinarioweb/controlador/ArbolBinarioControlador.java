@@ -42,6 +42,10 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verPorNivel = false;
     private boolean verHojas = false;
     private boolean verBalance = false;
+    private boolean verRamaMayor = false;
+    private boolean verBorrarMayor = false;
+    private boolean verBorrarMenor = false;
+    
 
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
@@ -125,6 +129,30 @@ public class ArbolBinarioControlador implements Serializable {
 
     public void setVerBalance(boolean verBalance) {
         this.verBalance = verBalance;
+    }
+    
+    public boolean isVerRamaMayor() {
+        return verRamaMayor;
+    }
+
+    public void setVerRamaMayor(boolean verRamaMayor) {
+        this.verRamaMayor = verRamaMayor;
+    }
+    
+    public boolean isVerBorrarMenor() {
+        return verBorrarMenor;
+    }
+
+    public void setVerBorrarMenor(boolean verBorrarMenor) {
+        this.verBorrarMenor = verBorrarMenor;
+    }
+    
+    public boolean isVerBorrarMayor() {
+        return verBorrarMenor;
+    }
+
+    public void setVerBorrarMayor(boolean verBorrarMayor) {
+        this.verBorrarMayor = verBorrarMayor;
     }
     
     public int getDato() {
@@ -211,6 +239,33 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verBalance = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarObtenerRamaMayor() {
+        try {
+            arbol.isLleno();
+            verRamaMayor = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+        
+    public void habilitarBorrarMenor() {
+        try {
+            arbol.isLleno();
+            verBorrarMenor = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBorrarMayor() {
+        try {
+            arbol.isLleno();
+            verBorrarMayor = true;
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }

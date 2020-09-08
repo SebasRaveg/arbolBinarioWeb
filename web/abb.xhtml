@@ -46,7 +46,9 @@
                 <p:commandButton value="PorNivel" action="#{arbolBinarioControlador.habilitarPorNivel()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
                 <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
-
+                <p:commandButton value="Obtener Rama(s) Mayor" action="#{arbolBinarioControlador.habilitarObtenerRamaMayor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Menor" action="#{arbolBinarioControlador.habilitarBorrarMenor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Mayor" action="#{arbolBinarioControlador.habilitarBorrarMayor()}" update="@all" ajax="false"/>
 
             </p:panel>
         </h:form>
@@ -131,7 +133,36 @@
                 </p:dataTable>
             </p:panel>
         </h:panelGroup>
-
+        
+        <h:panelGroup rendered="#{arbolBinarioControlador.verRamaMayor}">
+            <p:panel header="ObtenerRamaMayor">
+                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.ObtenerRamamayor()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMenor}">
+            <p:panel header="BorrarMenor">
+                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.borrarMenor()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMayor}">
+            <p:panel header="BorrarMayor">
+                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.borrarMayor()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:panelGroup>
         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         
