@@ -170,7 +170,33 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
+    
+    
+    public void buscarNodo() {
+        Nodo NodoEncontrado = arbol.buscarNodo(dato, arbol.getRaiz());
+                ;
+        try {
+            arbol.isLleno();
+            
+            if (NodoEncontrado!= null) 
+             {
+              JsfUtil.addSuccessMessage("El dato "+dato+" a sido encontrado");
+             }
+             else 
+             {
+             JsfUtil.addErrorMessage("El dato "+dato+" no a sido encontrado") ;
+             };
+            dato = 0;
+            
+            
 
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+
+    
+    
     public void habilitarInOrden() {
         try {
             arbol.isLleno();

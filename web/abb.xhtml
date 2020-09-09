@@ -22,6 +22,14 @@
             </p:panel>
         </h:form>
         <h:form>
+            <p:panel header="Panel Buscar Nodo">
+                <p:outputLabel value="buscar:"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
+                <p:commandButton ajax="false"  value="buscar" action="#{arbolBinarioControlador.buscarNodo()}"
+                                 update="@all" />
+            </p:panel>
+        </h:form>
+        <h:form>
             <p:panel header="Llenar árbol">
                 <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}"
