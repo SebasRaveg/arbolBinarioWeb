@@ -273,6 +273,18 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
+    
+    public void habilitarPodar() {
+        try {
+            arbol.isLleno();
+            arbol.podar();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Las Hojas del Arbol, Fueron eliminadas");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
 
     public DefaultDiagramModel getModel() {
         return model;
