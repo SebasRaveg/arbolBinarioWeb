@@ -8,23 +8,7 @@
         
     </ui:define>
     <ui:define name="content"> 
-        <style type="text/css">
-    .ui-diagram-element {   
-        width:8em; 
-        height:4em;     
-        line-height:4em;
-        text-align: center;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
-        border-radius: 4px;
-        border: 1px solid #646D7E;
-        background-color: #646D7E;
-        color: #ffffff;
-    }
-     
-    .ui-diagram-element:hover {
-        background-color: #828B9C;
-    }
-    </style>
+        
 
         <p:growl id="grwlErrores"/>
         <p:diagram id="pnlArbol" value="#{arbolBinarioControlador.model}" style="height:400px" styleClass="ui-widget-content" />
@@ -37,28 +21,35 @@
                                  update="@all" />
             </p:panel>
         </h:form>
-        
-        <h:form>
-            <p:panel header="Funciones">
-                <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="PreOrden" action="#{arbolBinarioControlador.habilitarPreOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="PosOrden" action="#{arbolBinarioControlador.habilitarPosOrden()}" update="@all" ajax="false"/>
-                <p:commandButton value="PorNivel" action="#{arbolBinarioControlador.habilitarPorNivel()}" update="@all" ajax="false"/>
-                <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
-                <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
-                <p:commandButton value="Obtener Rama(s) Mayor" action="#{arbolBinarioControlador.habilitarObtenerRamaMayor()}" update="@all" ajax="false"/>
-                <p:commandButton value="Borrar Menor" action="#{arbolBinarioControlador.habilitarBorrarMenor()}" update="@all" ajax="false"/>
-                <p:commandButton value="Borrar Mayor" action="#{arbolBinarioControlador.habilitarBorrarMayor()}" update="@all" ajax="false"/>
-
-            </p:panel>
-        </h:form>
-        
         <h:form>
             <p:panel header="Llenar árbol">
                 <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}"
                                  update="@all" ajax="false"/>
 
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Ordenamientos">
+                <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PreOrden" action="#{arbolBinarioControlador.habilitarPreOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PosOrden" action="#{arbolBinarioControlador.habilitarPosOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PorNivel" action="#{arbolBinarioControlador.habilitarPorNivel()}" update="@all" ajax="false"/>
+                
+                
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Funciones">
+                <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
+                <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
+                <p:commandButton value="Obtener Rama(s) Mayor" action="#{arbolBinarioControlador.habilitarObtenerRamaMayor()}" update="@all" ajax="false"/>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Borrar">
+                <p:commandButton value="Borrar Menor" action="#{arbolBinarioControlador.habilitarBorrarMenor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Mayor" action="#{arbolBinarioControlador.habilitarBorrarMayor()}" update="@all" ajax="false"/>
             </p:panel>
         </h:form>
         <h:form>
@@ -87,7 +78,7 @@
         <h:panelGroup rendered="#{arbolBinarioControlador.verPreOrden}">
             <p:panel header="PreOrden">
                 <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.preOrden()}">
-                    <p:column headerText="Número">
+                    <p:column headerText="Id">
                         <h:outputText value="#{data}" />
                     </p:column>
                 </p:dataTable>
@@ -97,7 +88,7 @@
         <h:panelGroup rendered="#{arbolBinarioControlador.verPosOrden}">
             <p:panel header="PosOrden">
                 <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.posOrden()}">
-                    <p:column headerText="Número">
+                    <p:column headerText="Id">
                         <h:outputText value="#{data}" />
                     </p:column>
                 </p:dataTable>
@@ -107,7 +98,7 @@
         <h:panelGroup rendered="#{arbolBinarioControlador.verPorNivel}">
             <p:panel header="PorNiveles">
                 <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.impNiveles()}">
-                    <p:column headerText="Número">
+                    <p:column headerText="Id">
                         <h:outputText value="#{data}" />
                     </p:column>
                 </p:dataTable>
@@ -117,53 +108,24 @@
         <h:panelGroup rendered="#{arbolBinarioControlador.verHojas}">
             <p:panel header="Hojas">
                 <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.getHojas()}">
-                    <p:column headerText="Número">
+                    <p:column headerText="Id">
                         <h:outputText value="#{data}" />
                     </p:column>
                 </p:dataTable>
             </p:panel>
         </h:panelGroup>
         
-        <h:panelGroup rendered="#{arbolBinarioControlador.verBalance}">
-            <p:panel header="Balance">
-                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.imprimirBalance()}">
-                    <p:column headerText="Número">
-                        <h:outputText value="#{data}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:panelGroup>
         
         <h:panelGroup rendered="#{arbolBinarioControlador.verRamaMayor}">
-            <p:panel header="ObtenerRamaMayor">
+            <p:panel header="Obtener Rama Mayor">
                 <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.ObtenerRamamayor()}">
-                    <p:column headerText="Número">
+                    <p:column headerText="Id">
                         <h:outputText value="#{data}" />
                     </p:column>
                 </p:dataTable>
             </p:panel>
         </h:panelGroup>
-        
-        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMenor}">
-            <p:panel header="BorrarMenor">
-                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.borrarMenor()}">
-                    <p:column headerText="Número">
-                        <h:outputText value="#{data}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:panelGroup>
-        
-        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMayor}">
-            <p:panel header="BorrarMayor">
-                <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.borrarMayor()}">
-                    <p:column headerText="Número">
-                        <h:outputText value="#{data}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:panelGroup>
-        
+         
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         
     </ui:define>

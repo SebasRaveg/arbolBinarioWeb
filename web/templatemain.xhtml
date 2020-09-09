@@ -10,17 +10,22 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css" media="screen"/>
         <title>Facelets Template</title>
         <style type="text/css">
-            .ui-diagram-element {   
-                width:3em; 
-                height:3em;
-                line-height:3em;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
-                border-radius: 3em;
-                border: 1px solid #186080;
-                background-color: #186080;
-                color: #cccccc;
-            }
+                .ui-diagram-element {   
+                    width:8em; 
+                    height:4em;     
+                    line-height:4em;
+                    text-align: center;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+                    border-radius: 4px;
+                    border: 1px solid #646D7E;
+                    background-color: #646D7E;
+                    color: #ffffff;
+                }
+
+                .ui-diagram-element:hover {
+                    background-color: #828B9C;
+                }
+        
             .ui-diagram-element-busc {   
                 width:3em; 
                 height:3em;
@@ -32,11 +37,7 @@
                 background-color: red;
                 color: black;
             }
-
-            .ui-diagram-element:hover {
-                background-color: #20282b;
-            }
-            
+                        
             .ui-widget-header{
                  background-color: transparent;
                  background: transparent;

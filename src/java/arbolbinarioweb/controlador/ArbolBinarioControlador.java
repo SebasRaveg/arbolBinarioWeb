@@ -43,10 +43,7 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verHojas = false;
     private boolean verBalance = false;
     private boolean verRamaMayor = false;
-    private boolean verBorrarMayor = false;
-    private boolean verBorrarMenor = false;
-    
-
+   
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
     private ArbolBinario arbolTerminados = new ArbolBinario();
@@ -66,7 +63,7 @@ public class ArbolBinarioControlador implements Serializable {
     public void setTerminado(int terminado) {
         this.terminado = terminado;
     }
-
+    
     public DefaultDiagramModel getModelArbol2() {
         return modelArbol2;
     }
@@ -139,22 +136,6 @@ public class ArbolBinarioControlador implements Serializable {
         this.verRamaMayor = verRamaMayor;
     }
     
-    public boolean isVerBorrarMenor() {
-        return verBorrarMenor;
-    }
-
-    public void setVerBorrarMenor(boolean verBorrarMenor) {
-        this.verBorrarMenor = verBorrarMenor;
-    }
-    
-    public boolean isVerBorrarMayor() {
-        return verBorrarMenor;
-    }
-
-    public void setVerBorrarMayor(boolean verBorrarMayor) {
-        this.verBorrarMayor = verBorrarMayor;
-    }
-    
     public int getDato() {
         return dato;
     }
@@ -194,6 +175,7 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verInOrden = true;
+            JsfUtil.addSuccessMessage("Recorrido InOrden");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -203,6 +185,7 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verPreOrden = true;
+            JsfUtil.addSuccessMessage("Recorrido PreOrden");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -212,6 +195,7 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verPosOrden = true;
+            JsfUtil.addSuccessMessage("Recorrido PosOrden");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -221,6 +205,18 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verPorNivel = true;
+            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPorOrdenamiento() {
+        try {
+            arbol.isLleno();
+            
+            verPorNivel = true;
+            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -230,6 +226,7 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verHojas = true;
+            JsfUtil.addSuccessMessage("Hojas del Arbol");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -238,7 +235,8 @@ public class ArbolBinarioControlador implements Serializable {
     public void habilitarBalance() {
         try {
             arbol.isLleno();
-            verBalance = true;
+            String balance = arbol.imprimirBalance();
+            JsfUtil.addSuccessMessage(balance);          
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -248,6 +246,7 @@ public class ArbolBinarioControlador implements Serializable {
         try {
             arbol.isLleno();
             verRamaMayor = true;
+            JsfUtil.addSuccessMessage("Rama(s) con mas valores");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -256,7 +255,9 @@ public class ArbolBinarioControlador implements Serializable {
     public void habilitarBorrarMenor() {
         try {
             arbol.isLleno();
-            verBorrarMenor = true;
+            String borrado = arbol.borrarMenor();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se ha eliminado el dato: " + borrado);
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -265,7 +266,9 @@ public class ArbolBinarioControlador implements Serializable {
     public void habilitarBorrarMayor() {
         try {
             arbol.isLleno();
-            verBorrarMayor = true;
+            String borrado = arbol.borrarMayor();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se ha eliminado el dato: " + borrado);
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -295,8 +298,7 @@ public class ArbolBinarioControlador implements Serializable {
     private void pintarArbol(Nodo reco, DefaultDiagramModel model, Element padre, int x, int y) {
 
         if (reco != null) {
-            Element elementHijo = new Element(reco.getDato() + " G:"+reco.obtenerGradoNodo()+" H:"+
-                    reco.obtenerAlturaNodo());
+            Element elementHijo = new Element(reco.getDato());
 
             elementHijo.setX(String.valueOf(x) + "em");
             elementHijo.setY(String.valueOf(y) + "em");
@@ -326,7 +328,7 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage("Los datos ingresados no tienen el formato separado por comas");
         }
     }
-
+    
     public void buscarTerminadosEn() {
         for (Element ele : model.getElements()) {
             ele.setStyleClass("ui-diagram-element");
