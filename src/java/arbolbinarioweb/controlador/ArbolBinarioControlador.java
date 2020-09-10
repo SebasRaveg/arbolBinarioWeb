@@ -40,8 +40,8 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verPreOrden = false;
     private boolean verPosOrden = false;
     private boolean verPorNivel = false;
+    private boolean verNivelesOrdenados = false;
     private boolean verHojas = false;
-    private boolean verBalance = false;
     private boolean verRamaMayor = false;
    
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
@@ -112,20 +112,20 @@ public class ArbolBinarioControlador implements Serializable {
         this.verPorNivel = verPorNivel;
     }
     
+    public boolean isVerNivelesOrdenados() {
+        return verNivelesOrdenados;
+    }
+
+    public void setVerNivelesOrdenados(boolean verNivelesOrdenados) {
+        this.verNivelesOrdenados = verNivelesOrdenados;
+    }
+    
     public boolean isVerHojas() {
         return verHojas;
     }
 
     public void setVerHojas(boolean verHojas) {
         this.verHojas = verHojas;
-    }
-    
-    public boolean isVerBalance() {
-        return verBalance;
-    }
-
-    public void setVerBalance(boolean verBalance) {
-        this.verBalance = verBalance;
     }
     
     public boolean isVerRamaMayor() {
@@ -171,32 +171,25 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-    
     public void buscarNodo() {
         Nodo NodoEncontrado = arbol.buscarNodo(dato, arbol.getRaiz());
-                ;
         try {
             arbol.isLleno();
-            
             if (NodoEncontrado!= null) 
              {
-              JsfUtil.addSuccessMessage("El dato "+dato+" a sido encontrado");
+              JsfUtil.addSuccessMessage("El dato "+dato+" si se encuentra en el arbol");
              }
              else 
              {
-             JsfUtil.addErrorMessage("El dato "+dato+" no a sido encontrado") ;
+             JsfUtil.addErrorMessage("El dato "+dato+" no se encuentra en el arbol") ;
              };
             dato = 0;
             
-            
-
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
 
-    
-    
     public void habilitarInOrden() {
         try {
             arbol.isLleno();
@@ -237,12 +230,12 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-    public void habilitarPorOrdenamiento() {
+    public void habilitarNivelesOrdenados() {
         try {
             arbol.isLleno();
-            
-            verPorNivel = true;
-            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
+            arbol.alturaArbol();
+            verNivelesOrdenados = true;
+            JsfUtil.addSuccessMessage("");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -277,7 +270,18 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-        
+    
+    public void habilitarCambiarValor() {
+        try {
+            arbol.isLleno();
+            arbol.cambiar();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se cambiaron los valores del arbol");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+       
     public void habilitarBorrarMenor() {
         try {
             arbol.isLleno();
