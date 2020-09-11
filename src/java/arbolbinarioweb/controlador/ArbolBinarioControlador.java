@@ -190,6 +190,44 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    public void darPadre(Integer hijo) {
+        hijo = dato;
+        if (this.arbol.getRaiz().getDato() == (hijo)) {
+            JsfUtil.addSuccessMessage("La raiz no tiene padre");
+            dato = 0;
+        }
+        Integer padre = this.arbol.padre(hijo);
+        if (padre == null) {
+            JsfUtil.addSuccessMessage("No existe el Dato: " + hijo.toString());
+            dato = 0;
+        }
+        JsfUtil.addSuccessMessage("El padre de: " + hijo + "\n es : " + padre.toString());
+        dato = 0;
+    }
+    
+    public void borrarNodo() {
+            Nodo NodoaBorrar = arbol.borrarNodo(arbol.getRaiz(), dato);
+        try {
+            arbol.isLleno();
+            
+            if (NodoaBorrar== null) 
+             {
+              JsfUtil.addSuccessMessage("El dato "+dato+" no existe");
+             }
+             else 
+             {
+              JsfUtil.addErrorMessage("El dato "+dato+" fue borrado");
+              pintarArbol();
+             };
+            dato = 0;
+            
+            
+
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
     public void habilitarInOrden() {
         try {
             arbol.isLleno();

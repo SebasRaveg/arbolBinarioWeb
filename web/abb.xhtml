@@ -27,9 +27,9 @@
             <p:panel header="Buscar Nodo / Buscar Padre / Borrar Nodo">
                 <p:outputLabel value="Dato:"/>
                 <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
-               <p:commandButton ajax="false"  value="Buscar" action="#{arbolBinarioControlador.buscarNodo()}" update="@all" />
-               <p:commandButton ajax="false"  value="Buscar Padre" action="#{arbolBinarioControlador.buscarPadre()}" update="@all" />
-               <p:commandButton ajax="false"  value="Borrar" action="#{arbolBinarioControlador.borrarNodo()}" update="@all" />
+               <p:commandButton ajax="false" value="Buscar" action="#{arbolBinarioControlador.buscarNodo()}" update="@all" />
+               <p:commandButton ajax="false" value="Buscar Padre" action="#{arbolBinarioControlador.darPadre(Interger)}" update="@all" />
+               <p:commandButton ajax="false" value="Borrar" action="#{arbolBinarioControlador.borrarNodo()}" update="@all" />
             </p:panel>
         </h:form>
         <h:form>
