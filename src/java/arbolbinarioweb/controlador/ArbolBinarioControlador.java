@@ -189,7 +189,7 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-
+    
     public void habilitarInOrden() {
         try {
             arbol.isLleno();
@@ -235,7 +235,7 @@ public class ArbolBinarioControlador implements Serializable {
             arbol.isLleno();
             arbol.alturaArbol();
             verNivelesOrdenados = true;
-            JsfUtil.addSuccessMessage("");
+            JsfUtil.addSuccessMessage("Imprimir por Niveles en Orden");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
