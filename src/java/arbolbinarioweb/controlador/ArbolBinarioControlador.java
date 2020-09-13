@@ -176,8 +176,8 @@ public class ArbolBinarioControlador implements Serializable {
             arbol.isLleno();
             arbol.Multiplicar(dato);
             pintarArbol();
+            JsfUtil.addSuccessMessage("Los valores del arbol han sido multiplicados por " + dato);
             dato=0;
-            JsfUtil.addSuccessMessage("Se cambiaron los valores del arbol");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
@@ -188,8 +188,8 @@ public class ArbolBinarioControlador implements Serializable {
             arbol.isLleno();
             arbol.borrarNivel(dato);
             pintarArbol();
+            JsfUtil.addSuccessMessage("Se han eliminado los niveles: "+ dato);
             dato=0;
-            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
