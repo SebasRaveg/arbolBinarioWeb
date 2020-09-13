@@ -171,6 +171,31 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    public void habilitarMultipicarValor() {
+        try {
+            arbol.isLleno();
+            arbol.Multiplicar(dato);
+            pintarArbol();
+            dato=0;
+            JsfUtil.addSuccessMessage("Se cambiaron los valores del arbol");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarborrarPorNivel() {
+        try {
+            arbol.isLleno();
+            arbol.borrarNivel(dato);
+            pintarArbol();
+            dato=0;
+            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    
     public void buscarNodo() {
         Nodo NodoEncontrado = arbol.buscarNodo(dato, arbol.getRaiz());
         try {

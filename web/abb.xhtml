@@ -24,12 +24,15 @@
             </p:panel>
         </h:form>
         <h:form>
-            <p:panel header="Buscar Nodo / Buscar Padre / Borrar Nodo">
+            <p:panel header="Buscar Nodo / Buscar Padre / Borrar Nodo / Multiplicar / Borrar Nivel">
                 <p:outputLabel value="Dato:"/>
                 <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
                <p:commandButton ajax="false" value="Buscar" action="#{arbolBinarioControlador.buscarNodo()}" update="@all" />
                <p:commandButton ajax="false" value="Buscar Padre" action="#{arbolBinarioControlador.darPadre(Interger)}" update="@all" />
                <p:commandButton ajax="false" value="Borrar" action="#{arbolBinarioControlador.borrarNodo()}" update="@all" />
+               <p:commandButton ajax="false"  value="Multiplicar" action="#{arbolBinarioControlador.habilitarMultipicarValor()}" update="@all" />
+               <p:commandButton ajax="false"  value="Borrar Nivel" action="#{arbolBinarioControlador.habilitarborrarPorNivel()}" update="@all" />               
+            </p:panel>               
             </p:panel>
         </h:form>
         <h:form>
