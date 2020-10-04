@@ -47,6 +47,26 @@ public class ArbolBinarioControlador implements Serializable {
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
     private ArbolBinario arbolTerminados = new ArbolBinario();
+    
+    private int datoSumar; 
+    
+    private int datoPromediar;
+
+    public int getDatoPromediar() {
+        return datoPromediar;
+    }
+
+    public void setDatoPromediar(int datoPromediar) {
+        this.datoPromediar = datoPromediar;
+    }
+
+    public int getDatoSumar() {
+        return datoSumar;
+    }
+
+    public void setDatoSumar(int datoSumar) {
+        this.datoSumar = datoSumar;
+    }
 
     public ArbolBinario getArbolTerminados() {
         return arbolTerminados;
@@ -196,22 +216,17 @@ public class ArbolBinarioControlador implements Serializable {
     }
     
     
-    public void buscarNodo() {
-        Nodo NodoEncontrado = arbol.buscarNodo(dato, arbol.getRaiz());
+    public void buscarNodo(){
         try {
-            arbol.isLleno();
-            if (NodoEncontrado!= null) 
-             {
-              JsfUtil.addSuccessMessage("El dato "+dato+" si se encuentra en el arbol");
-             }
-             else 
-             {
-             JsfUtil.addErrorMessage("El dato "+dato+" no se encuentra en el arbol") ;
-             };
-            dato = 0;
-            
+            Nodo nodoEncontrado = arbol.buscarNodo(dato, arbol.getRaiz());
+                arbol.isLleno();
+                if (nodoEncontrado!= null)
+                {
+                    JsfUtil.addSuccessMessage("El dato "+dato+" si se encuentra en el arbol");
+                }
+                dato = 0;
         } catch (ArbolBinarioException ex) {
-            JsfUtil.addErrorMessage(ex.getMessage());
+             JsfUtil.addErrorMessage("El dato "+dato+" no se encuentra en el arbol") ;
         }
     }
     
@@ -378,6 +393,40 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    public void habilitarPromediar()
+    {
+        if(arbol.getRaiz()!=null)
+        {
+            try {
+                Nodo nodoencontrado = arbol.buscarNodo(datoPromediar, arbol.getRaiz());
+                if(nodoencontrado != null)
+                {
+                    //Encontró un arbol
+                    float cont= arbol.contarNodos(nodoencontrado);
+                    float suma = arbol.sumarNodos(nodoencontrado);
+                    JsfUtil.addSuccessMessage("El árbol tiene "+ cont+" elementos,\n"
+                            + " suman "+suma+"\n, Promedian "+ (suma/cont));
+                }
+                
+            } catch (ArbolBinarioException ex) {
+                JsfUtil.addErrorMessage(ex.getMessage());
+            }
+        }
+        else
+        {
+            JsfUtil.addErrorMessage("No puede promediar un árbol vacío");
+        }    
+    }
+    
+    public void sumarNodo(){
+        try {
+            Nodo nodoEncontrado= arbol.buscarNodo(datoSumar, arbol.getRaiz());
+            JsfUtil.addSuccessMessage("El nodo suma:" + arbol.sumarNodos(nodoEncontrado));
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+        
+    }
 
     public DefaultDiagramModel getModel() {
         return model;
@@ -393,10 +442,10 @@ public class ArbolBinarioControlador implements Serializable {
         model.setMaxConnections(-1);
         model.setConnectionsDetachable(false);
         StraightConnector connector = new StraightConnector();
-        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
+        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:6}");
         connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
         model.setDefaultConnector(connector);
-        pintarArbol(arbol.getRaiz(), model, null, 30, 0);
+        pintarArbol(arbol.getRaiz(), model, null, 50, 0);
 
     }
 

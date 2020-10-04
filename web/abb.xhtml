@@ -18,9 +18,27 @@
                 <p:outputLabel value="Dato:"/>
                 <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
                 <p:commandButton ajax="false"  value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}" update="@all" />
+                <p:outputLabel value="Nro Nodos: "/>
+                <p:outputLabel value="#{arbolBinarioControlador.arbol.contarNodos()}"/>                
+                <p:outputLabel value=" Suma Total árbol: "/>
+                <p:outputLabel value="#{arbolBinarioControlador.arbol.sumarArbol()}"/>
                 <br> </br>
                 <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}" update="@all" ajax="false"/>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Obtener la suma de un nodo">
+                <p:inputText required="#{arbolBinarioControlador.datoSumar}true"/>
+                <p:commandButton value="Obtener Suma" update="@all" ajax="false" action="#{arbolBinarioControlador.sumarNodo()}"/>
+            </p:panel>
+        </h:form>
+        <h:form >
+            <p:panel header="Promediar árbol">
+                <p:inputText id="txtPromediar" value="#{arbolBinarioControlador.datoPromediar}" 
+                             required="true" requiredMessage="Se necesita un valor a promediar"/>
+                <p:commandButton value="Promediar" update="@all" ajax="false" 
+                                 action="#{arbolBinarioControlador.habilitarPromediar()}" />
             </p:panel>
         </h:form>
         <h:form>
