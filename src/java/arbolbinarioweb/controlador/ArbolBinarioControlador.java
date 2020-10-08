@@ -33,6 +33,16 @@ public class ArbolBinarioControlador implements Serializable {
 
     private DefaultDiagramModel model;
     private DefaultDiagramModel modelArbol2;
+    private DefaultDiagramModel modeloArbolSuma;
+    private ArbolBinario arbolSuma= new ArbolBinario();
+
+    public DefaultDiagramModel getModeloArbolSuma() {
+        return modeloArbolSuma;
+    }
+
+    public void setModeloArbolSuma(DefaultDiagramModel modeloArbolSuma) {
+        this.modeloArbolSuma = modeloArbolSuma;
+    }
 
     private ArbolBinario arbol = new ArbolBinario();
     private int dato;
@@ -555,6 +565,45 @@ public class ArbolBinarioControlador implements Serializable {
 
             pintarArbolTerminados(reco.getIzquierda(), model, elementHijo, x - 5, y + 5);
             pintarArbolTerminados(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
+        }
+    }
+    
+    
+    
+    
+    public void pintarArbolSuma() {
+
+        modeloArbolSuma = new DefaultDiagramModel();
+        modeloArbolSuma.setMaxConnections(-1);
+        modeloArbolSuma.setConnectionsDetachable(false);
+        StraightConnector connector = new StraightConnector();
+        connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
+        connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
+        modeloArbolSuma.setDefaultConnector(connector);
+        pintarArbolSuma(arbolSuma.getRaiz(), modeloArbolSuma, null, 30, 0);
+
+    }
+
+    private void pintarArbolSuma(Nodo reco, DefaultDiagramModel model, Element padre, int x, int y) {
+
+        if (reco != null) {
+            Element elementHijo = new Element(reco.getDato());
+
+            elementHijo.setX(String.valueOf(x) + "em");
+            elementHijo.setY(String.valueOf(y) + "em");
+
+            if (padre != null) {
+                elementHijo.addEndPoint(new DotEndPoint(EndPointAnchor.TOP));
+                DotEndPoint conectorPadre = new DotEndPoint(EndPointAnchor.BOTTOM);
+                padre.addEndPoint(conectorPadre);
+                model.connect(new Connection(conectorPadre, elementHijo.getEndPoints().get(0)));
+
+            }
+
+            model.addElement(elementHijo);
+
+            pintarArbolSuma(reco.getIzquierda(), model, elementHijo, x - 5, y + 5);
+            pintarArbolSuma(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
         }
     }
 

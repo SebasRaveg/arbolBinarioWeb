@@ -14,7 +14,7 @@
         <p:diagram id="pnlArbol" value="#{arbolBinarioControlador.model}" style="height:400px" styleClass="ui-widget-content" />
 
         <h:form>
-            <p:panel header="Agregar Nodo / Llenar Arbol">
+            <p:panel header="Agregar Nodo">
                 <p:outputLabel value="Dato:"/>
                 <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
                 <p:commandButton ajax="false"  value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}" update="@all" />
@@ -22,14 +22,17 @@
                 <p:outputLabel value="#{arbolBinarioControlador.arbol.contarNodos()}"/>                
                 <p:outputLabel value=" Suma Total árbol: "/>
                 <p:outputLabel value="#{arbolBinarioControlador.arbol.sumarArbol()}"/>
-                <br> </br>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Llenar Arbol">
                 <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
                 <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}" update="@all" ajax="false"/>
             </p:panel>
         </h:form>
         <h:form>
             <p:panel header="Obtener la suma de un nodo">
-                <p:inputText required="#{arbolBinarioControlador.datoSumar}true"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.datoSumar}"/>
                 <p:commandButton value="Obtener Suma" update="@all" ajax="false" action="#{arbolBinarioControlador.sumarNodo()}"/>
             </p:panel>
         </h:form>
