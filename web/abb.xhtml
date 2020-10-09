@@ -89,6 +89,16 @@
             </p:panel>
         </h:form>
         
+        <h:form>
+            <p:panel header="Sumar Nodos / Obtener Arbol Suma">
+                <p:inputText required="true" value="#{arbolBinarioControlador.datoSumar}"/>
+                <p:commandButton value="Obtener suma de nodos" update="@all" ajax="false" action="#{arbolBinarioControlador.sumarNodo()}"/>
+                <p:commandButton value="Obtener árbol suma" 
+                                 action="#{arbolBinarioControlador.obtenerArbolSuma()}"
+                                 update="@all" ajax="false"/>
+            </p:panel>
+        </h:form>
+        
         <h:panelGroup rendered="#{arbolBinarioControlador.verInOrden}">
             <p:panel header="InOrden">
                 <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.inOrden()}">
@@ -161,6 +171,8 @@
         </h:panelGroup>
          
         <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
+        <p:diagram id="pnlArbolSuma" value="#{arbolBinarioControlador.modelArbolSuma}" style="height:400px" styleClass="ui-widget-content" />
+
         
     </ui:define>
 

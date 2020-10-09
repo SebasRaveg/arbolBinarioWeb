@@ -33,16 +33,18 @@ public class ArbolBinarioControlador implements Serializable {
 
     private DefaultDiagramModel model;
     private DefaultDiagramModel modelArbol2;
-    private DefaultDiagramModel modeloArbolSuma;
+    private DefaultDiagramModel modelArbolSuma;
     private ArbolBinario arbolSuma= new ArbolBinario();
 
-    public DefaultDiagramModel getModeloArbolSuma() {
-        return modeloArbolSuma;
+    public DefaultDiagramModel getModelArbolSuma() {
+        return modelArbolSuma;
     }
 
-    public void setModeloArbolSuma(DefaultDiagramModel modeloArbolSuma) {
-        this.modeloArbolSuma = modeloArbolSuma;
+    public void setModelArbolSuma(DefaultDiagramModel modelArbolSuma) {
+        this.modelArbolSuma = modelArbolSuma;
     }
+
+
 
     private ArbolBinario arbol = new ArbolBinario();
     private int dato;
@@ -568,19 +570,35 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-    
-    
+    public void obtenerArbolSuma() {
+        try {
+            arbolSuma = new ArbolBinario();
+            obtenerArbolSuma(arbol.getRaiz());
+            pintarArbolTerminados();
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage("Ocurrio un error generando el árbol Suma" + ex);
+        }
+    }
+
+    private void obtenerArbolSuma(Nodo reco) throws ArbolBinarioException {
+        if (reco != null) {
+            int suma = reco.getDato();
+            arbolSuma.adicionarNodo(suma, arbolSuma.getRaiz());
+            obtenerArbolSuma(reco.getIzquierda());
+            obtenerArbolSuma(reco.getDerecha());
+        }
+    }
     
     public void pintarArbolSuma() {
 
-        modeloArbolSuma = new DefaultDiagramModel();
-        modeloArbolSuma.setMaxConnections(-1);
-        modeloArbolSuma.setConnectionsDetachable(false);
+        modelArbolSuma = new DefaultDiagramModel();
+        modelArbolSuma.setMaxConnections(-1);
+        modelArbolSuma.setConnectionsDetachable(false);
         StraightConnector connector = new StraightConnector();
         connector.setPaintStyle("{strokeStyle:'#404a4e', lineWidth:2}");
         connector.setHoverPaintStyle("{strokeStyle:'#20282b'}");
-        modeloArbolSuma.setDefaultConnector(connector);
-        pintarArbolSuma(arbolSuma.getRaiz(), modeloArbolSuma, null, 30, 0);
+        modelArbolSuma.setDefaultConnector(connector);
+        pintarArbolSuma(arbolSuma.getRaiz(), modelArbolSuma, null, 30, 0);
 
     }
 
