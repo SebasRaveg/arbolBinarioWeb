@@ -14,6 +14,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.Element;
@@ -32,6 +33,7 @@ public class ArbolSumaControlador implements Serializable {
     private int numero;
     private ArbolBinario arbol;
     private DefaultDiagramModel model;
+    private String textoHeader;
             
     public ArbolSumaControlador() {
         
@@ -40,7 +42,17 @@ public class ArbolSumaControlador implements Serializable {
     @PostConstruct
     private void inicializar(){
         arbol = new ArbolBinario();
+        textoHeader = "Arbol Sumatoria";
     }
+
+    public String getTextoHeader() {
+        return textoHeader;
+    }
+
+    public void setTextoHeader(String textoHeader) {
+        this.textoHeader = textoHeader;
+    }
+    
     
     public int getNumero() {
         return numero;
@@ -53,6 +65,13 @@ public class ArbolSumaControlador implements Serializable {
     public DefaultDiagramModel getModel() {
         return model;
     }
+    
+        public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb)
+    {
+        ///Construir con base en el abb el arbol sumas
+        //Recorrido del arbol abb y llenar mi arbol sumas
+        JsfUtil.addSuccessMessage("Llego arbol cant "+abb.contarNodos());
+    }
 
     public void adicionarNodo(){
         try {
@@ -61,6 +80,27 @@ public class ArbolSumaControlador implements Serializable {
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
+    }
+    
+     public void adicionarNodo(int parametro)
+    {
+        try {
+            arbol.adicionarNodo(new Dato(parametro), arbol.getRaiz());
+            pintarArbol();
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+     
+    
+    
+    public void onClickRight() {
+        String id = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("elementId");
+        
+        System.out.println(id.replaceAll("frmArbolSuma:diagrama-", ""));
+        
+        //Short.valueOf(id.replaceAll("frmMotociclista:diagrama-", ""));
     }
     
     public void pintarArbol() {
@@ -80,6 +120,7 @@ public class ArbolSumaControlador implements Serializable {
 
         if (reco != null) {
             Element elementHijo = new Element(reco.getDato().getSuma() + "       -Dato" + reco.getDato().getNumero());
+            elementHijo.setId(String.valueOf(reco.getDato().getNumero()));
 
             elementHijo.setX(String.valueOf(x) + "em");
             elementHijo.setY(String.valueOf(y) + "em");
