@@ -33,6 +33,12 @@ public class AVLControlador implements Serializable {
     private ArbolBinarioAVL arbol = new ArbolBinarioAVL();
     private int dato;
     private boolean verInOrden = false;
+    private boolean verPreOrden = false;
+    private boolean verPosOrden = false;
+    private boolean verPorNivel = false;
+    private boolean verNivelesOrdenados = false;
+    private boolean verHojas = false;
+    private boolean verRamaMayor = false;
 
     private String datoscsv = "5,6,7";//,-8,10,59,28,80,78,90";
     private int terminado;
@@ -69,6 +75,54 @@ public class AVLControlador implements Serializable {
 
     public void setVerInOrden(boolean verInOrden) {
         this.verInOrden = verInOrden;
+    }
+    
+        public boolean isVerPreOrden() {
+        return verPreOrden;
+    }
+
+    public void setVerPreOrden(boolean verPreOrden) {
+        this.verPreOrden = verPreOrden;
+    }
+
+    public boolean isVerPosOrden() {
+        return verPosOrden;
+    }
+
+    public void setVerPosOrden(boolean verPosOrden) {
+        this.verPosOrden = verPosOrden;
+    }
+
+    public boolean isVerPorNivel() {
+        return verPorNivel;
+    }
+
+    public void setVerPorNivel(boolean verPorNivel) {
+        this.verPorNivel = verPorNivel;
+    }
+
+    public boolean isVerNivelesOrdenados() {
+        return verNivelesOrdenados;
+    }
+
+    public void setVerNivelesOrdenados(boolean verNivelesOrdenados) {
+        this.verNivelesOrdenados = verNivelesOrdenados;
+    }
+    
+    public boolean isVerHojas() {
+        return verHojas;
+    }
+
+    public void setVerHojas(boolean verHojas) {
+        this.verHojas = verHojas;
+    }
+    
+    public boolean isVerRamaMayor() {
+        return verRamaMayor;
+    }
+
+    public void setVerRamaMayor(boolean verRamaMayor) {
+        this.verRamaMayor = verRamaMayor;
     }
 
     public int getDato() {
@@ -110,6 +164,121 @@ public class AVLControlador implements Serializable {
         try {
             arbol.isLleno();
             verInOrden = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPreOrden() {
+        try {
+            arbol.isLleno();
+            verPreOrden = true;
+            JsfUtil.addSuccessMessage("Recorrido PreOrden");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPosOrden() {
+        try {
+            arbol.isLleno();
+            verPosOrden = true;
+            JsfUtil.addSuccessMessage("Recorrido PosOrden");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPorNivel() {
+        try {
+            arbol.isLleno();
+            verPorNivel = true;
+            JsfUtil.addSuccessMessage("Imprimir Por Niveles");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarNivelesOrdenados() {
+        try {
+            arbol.isLleno();
+            arbol.alturaArbol();
+            verNivelesOrdenados = true;
+            JsfUtil.addSuccessMessage("Imprimir por Niveles en Orden");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+        public void habilitarHojas() {
+        try {
+            arbol.isLleno();
+            verHojas = true;
+            JsfUtil.addSuccessMessage("Hojas del Arbol");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBalance() {
+        try {
+            arbol.isLleno();
+            String balance = arbol.imprimirBalance();
+            JsfUtil.addSuccessMessage(balance);          
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarObtenerRamaMayor() {
+        try {
+            arbol.isLleno();
+            verRamaMayor = true;
+            JsfUtil.addSuccessMessage("Rama(s) con mas valores");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarCambiarValor() {
+        try {
+            arbol.isLleno();
+            arbol.cambiar();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se cambiaron los valores del arbol");
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+       
+    public void habilitarBorrarMenor() {
+        try {
+            arbol.isLleno();
+            String borrado = arbol.borrarMenor();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se ha eliminado el dato: " + borrado);
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBorrarMayor() {
+        try {
+            arbol.isLleno();
+            String borrado = arbol.borrarMayor();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Se ha eliminado el dato: " + borrado);
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPodar() {
+        try {
+            arbol.isLleno();
+            arbol.podar();
+            pintarArbol();
+            JsfUtil.addSuccessMessage("Las Hojas del Arbol, Fueron eliminadas");
         } catch (ArbolBinarioException ex) {
             JsfUtil.addErrorMessage(ex.getMessage());
         }

@@ -40,10 +40,8 @@
         </h:form>
         <h:form >
             <p:panel header="Promediar árbol">
-                <p:inputText id="txtPromediar" value="#{arbolBinarioControlador.datoPromediar}" 
-                             required="true" requiredMessage="Se necesita un valor a promediar"/>
-                <p:commandButton value="Promediar" update="@all" ajax="false" 
-                                 action="#{arbolBinarioControlador.habilitarPromediar()}" />
+                <p:inputText id="txtPromediar" value="#{arbolBinarioControlador.datoPromediar}" required="true" requiredMessage="Se necesita un valor a promediar"/>
+                <p:commandButton value="Promediar" update="@all" ajax="false" action="#{arbolBinarioControlador.habilitarPromediar()}" />
             </p:panel>
         </h:form>
         <h:form>
@@ -56,7 +54,6 @@
                <p:commandButton ajax="false"  value="Multiplicar" action="#{arbolBinarioControlador.habilitarMultipicarValor()}" update="@all" />
                <p:commandButton ajax="false"  value="Borrar Nivel" action="#{arbolBinarioControlador.habilitarborrarPorNivel()}" update="@all" />               
             </p:panel>               
-            
         </h:form>
         <h:form>
             <p:panel header="Ordenamientos">
