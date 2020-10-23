@@ -66,10 +66,13 @@ public class ArbolSumaControlador implements Serializable {
         return model;
     }
     
-        public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb)
+        public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb) throws ArbolBinarioException
     {
-        ///Construir con base en el abb el arbol sumas
+        //Construir con base en el abb el arbol sumas
         //Recorrido del arbol abb y llenar mi arbol sumas
+        //abb.getNumero; utilizar la instancia para el nuevo arbol para adicionar en el arbol
+        arbol = new ArbolBinario();
+        
         JsfUtil.addSuccessMessage("Llego arbol cant "+abb.contarNodos());
     }
 
