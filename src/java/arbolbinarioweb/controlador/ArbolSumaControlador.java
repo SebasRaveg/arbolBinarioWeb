@@ -13,6 +13,9 @@ import arbolbinarioweb.controlador.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.diagram.Connection;
@@ -66,16 +69,25 @@ public class ArbolSumaControlador implements Serializable {
         return model;
     }
     
-        public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb) throws ArbolBinarioException
+    public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb) throws ArbolBinarioException
     {
         //Construir con base en el abb el arbol sumas
         //Recorrido del arbol abb y llenar mi arbol sumas
         //abb.getNumero; utilizar la instancia para el nuevo arbol para adicionar en el arbol
         arbol = new ArbolBinario();
-        
-        JsfUtil.addSuccessMessage("Llego arbol cant "+abb.contarNodos());
+        abb.preOrden().forEach((l) -> {
+        int i = (Integer) l;
+            try {
+                arbol.adicionarNodo(new Dato(i), arbol.getRaiz());
+            } catch (ArbolBinarioException ex) {
+                Logger.getLogger(ArbolSumaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        JsfUtil.addSuccessMessage("Arbol Recorrido en PreOrden "+abb.preOrden());
+        pintarArbol();
     }
-
+    
+    
     public void adicionarNodo(){
         try {
             arbol.adicionarNodo(new Dato(numero), arbol.getRaiz());
