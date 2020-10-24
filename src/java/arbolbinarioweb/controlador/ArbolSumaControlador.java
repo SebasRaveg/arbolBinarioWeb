@@ -71,10 +71,8 @@ public class ArbolSumaControlador implements Serializable {
     
     public void llenarArbolsumas(arbolbinario.modelo.ArbolBinario abb) throws ArbolBinarioException
     {
-        //Construir con base en el abb el arbol sumas
         //Recorrido del arbol abb y llenar mi arbol sumas
-        //abb.getNumero; utilizar la instancia para el nuevo arbol para adicionar en el arbol
-        arbol = new ArbolBinario();
+        /*arbol = new ArbolBinario();
         abb.preOrden().forEach((l) -> {
         int i = (Integer) l;
             try {
@@ -82,11 +80,23 @@ public class ArbolSumaControlador implements Serializable {
             } catch (ArbolBinarioException ex) {
                 Logger.getLogger(ArbolSumaControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-        JsfUtil.addSuccessMessage("Arbol Recorrido en PreOrden "+abb.preOrden());
+        });*/
+        arbol = new ArbolBinario();
+        recorrerAbbPreOrden(abb.getRaiz());
         pintarArbol();
     }
     
+    private void recorrerAbbPreOrden(arbolbinario.modelo.Nodo temp){
+        if(temp != null){
+            try {
+                arbol.adicionarNodo(new Dato(temp.getDato()), arbol.getRaiz());
+                recorrerAbbPreOrden(temp.getIzquierda());
+                recorrerAbbPreOrden(temp.getDerecha());
+            } catch (ArbolBinarioException ex) {
+                JsfUtil.addErrorMessage(ex.getMessage());
+            }
+        }
+    }
     
     public void adicionarNodo(){
         try {

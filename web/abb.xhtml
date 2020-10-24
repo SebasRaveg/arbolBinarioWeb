@@ -34,7 +34,6 @@
             <p:panel header="Obtener la suma de un nodo">
                 <p:inputText required="true" value="#{arbolBinarioControlador.datoSumar}"/>
                 <p:commandButton value="Obtener Suma" update="@all" ajax="false" action="#{arbolBinarioControlador.sumarNodo()}"/>
-                <p:inputText value="#{arbolBinarioControlador.textoEnviar}" required="true"/>
                 <p:commandButton value="Comunicación entre beans" ajax="false" action="#{arbolBinarioControlador.irBeanSuma()}" />
             </p:panel>
         </h:form>
