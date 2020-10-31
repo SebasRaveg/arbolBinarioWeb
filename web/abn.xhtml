@@ -6,12 +6,12 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
+        <p:diagram id="pnlArbolN" value="#{arbolNControlador.model}" style="height:400px" styleClass="ui-widget-content" />
         <h:form>
-            <p:panel id="pnlArbolSuma" header="Arbol Sumatoria">
-                
-            </p:panel>
             <p:panel header="Nuevo Nodo">
-
+                <p:outputLabel value="Dato:"/>
+                <p:inputText required="true" value="#{arbolNControlador.dato}"/>
+                <p:commandButton ajax="false"  value="Agregar" action="#{arbolNControlador.insertarNodo()}" update="@all" />
             </p:panel>
         </h:form>
     </ui:define>
