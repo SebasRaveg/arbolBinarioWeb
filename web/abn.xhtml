@@ -3,15 +3,58 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./templatemain.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <p:diagram id="pnlArbolN" value="#{arbolNControlador.model}" style="height:400px" styleClass="ui-widget-content" />
         <h:form>
-            <p:panel header="Nuevo Nodo">
-                <p:outputLabel value="Dato:"/>
-                <p:inputText required="true" value="#{arbolNControlador.dato}"/>
-                <p:commandButton ajax="false"  value="Agregar" action="#{arbolNControlador.insertarNodo()}" update="@all" />
+            <p:diagram id="pnlArbolN" value="#{arbolNControlador.model}" style="height:600px" styleClass="ui-widget-content" />
+                <center>
+
+                    <p:commandButton value="Nuevo" action="#{arbolNControlador.habilitarRegistrar()}"
+                                     update="@all" ajax="false"  />
+                </center>
+        </h:form>
+        <h:form>
+            <p:panel  header="Registrar Cliente" rendered="#{arbolNControlador.verRegistrar}">
+                <center>
+                    <p:panelGrid columns="2">
+                                <p:panel header="Ingresar Informacion">
+                                    <p:outputLabel value="Identificacion:"/>
+                                    <br></br>
+                                    <p:inputText required="true" value="#{arbolNControlador.cliente.identificacion}"/>
+                                    <br>
+                                    </br>
+                                    <p:outputLabel value="Nombre:"/>
+                                    <br></br>
+                                    <p:inputText required="true" value="#{arbolNControlador.cliente.nombre}"/>
+                                    <br>
+                                    </br>
+                                    <p:outputLabel value="Apellido:"/>
+                                    <br></br>
+                                    <p:inputText required="true" value="#{arbolNControlador.cliente.apellido}"/>
+                                    <br>
+                                    </br>
+                                    <!--
+                                    <p:selectOneMenu value="#{arbolNControlador.cliente.ciudad.codigo}">
+                                        <f:selectItems value="#{arbolNControlador.ciudad}"
+                                           var="marc" itemLabel="#{ciuda.nombre}"
+                                           itemValue="#{ciuda.codigo}"
+                                           />
+                                    </p:selectOneMenu>
+                                    -->
+                                    <br>
+                                    </br>
+                                    <p:outputLabel value="Referido De:"/>
+                                    <br></br>
+                                    <p:inputText required="true" value="#{arbolNControlador.cliente.referidoDe}"/>
+                                    <br>
+                                    </br>
+                                    <p:commandButton value="Guardar" update="@all" ajax="false" action="#{arbolNControlador.guardarCelular()}"/>
+                                    <p:commandButton value="Cancelar" update="@all" ajax="false" immediate="true" action="#{arbolNControlador.cancelarGuardado()}" />
+                                </p:panel>   
+                   </p:panelGrid>
+                </center>
             </p:panel>
         </h:form>
     </ui:define>
